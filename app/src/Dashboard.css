@@ -1,0 +1,27 @@
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .status-running {
+    color: green;
+    
+  }
+
+    .status-stopped {
+        color: #ff0000;
+    }
+
+    .status-unknown {
+        color: #424200;
+    }
+    
+    .status-other {
+        color: grey;
+    }

@@ -45,17 +45,18 @@ function App() {
     )
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((node) => {
-      if ((Date.now() - Date.parse(node.lastUpdate)) / 1000 > 150) {
+      if ((Date.now() - Date.parse(node.lastUpdate)) / 1000 > 300) {
         node.status = "unknown";
       }
       return node;
     });
-
+  const runningCount = nodesToDisplay.filter((node) => node.status === "running").length;
+ 
   return (
     <div>
       <header>
         <h1>
-          MYRIA NODES MONITOR ({nodesToDisplay.length}/{nodes.length}){" "}
+          MYRIA NODES MONITOR (<span style={{color:"green"}}>{runningCount}</span>/{nodesToDisplay.length}/{nodes.length}){" "}
         </h1>
       </header>
 

@@ -45,7 +45,7 @@ function App() {
     )
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((node) => {
-      if ((Date.now() - Date.parse(node.lastUpdate)) / 1000 > 300) {
+      if ((Date.now() - Date.parse(node.lastUpdate)) / 1000 > 600) {
         node.status = "unknown";
       }
       return node;

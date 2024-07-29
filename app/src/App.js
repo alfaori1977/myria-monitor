@@ -14,8 +14,8 @@ function App() {
 
   useEffect(() => {
     const fetchStatus = async () => {
-      console.log("https://myriabackend.clubcerberus.com/status");
-      const response = await fetch("https://myriabackend.clubcerberus.com/status");
+      console.log("https://myriabackend.clubcerberus.org/status");
+      const response = await fetch("https://myriabackend.clubcerberus.org/status");
       const data = await response.json();
       setNodes(
         Object.entries(data).map(([nodeId, nodeData]) => ({

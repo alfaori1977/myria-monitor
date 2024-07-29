@@ -1,0 +1,24 @@
+services:
+  myria-nodes-monitor:
+    container_name: myria-nodes-monitor
+    image: alfaori/myria-nodes-monitor:latest
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+
+  myria-nodes-monitor-app:
+    container_name: myria-nodes-monitor-app
+    image: alfaori/myria-nodes-monitor-app:0.2
+    ports:
+      - "3006:3006"
+    restart: unless-stopped
+
+  myria-nodes-bot:
+    container_name: myria-nodes-bot
+    image: alfaori/myria-nodes-bot:latest
+    volumes:
+      - /tmp/MYRIA:/usr/src/app/logs
+    env_file:
+      - ./data/bot/.env
+    restart: unless-stopped
+

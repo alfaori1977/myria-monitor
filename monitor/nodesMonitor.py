@@ -14,7 +14,6 @@ def update_status():
     data = request.get_json()
     node_id = data['id']
     if node_id == "": return
-    print(data)
     status = data['status']    
     hostname = data.get('hostname', '')
     ip = data.get('ip', '')
@@ -23,7 +22,6 @@ def update_status():
     
     name = data.get('name', '')    
     customer = data.get('customer', '')
-
     # Update the status in the node_status dictionary
     node_status[node_id] = status
         # Update the node state
@@ -37,7 +35,6 @@ def update_status():
         'uptime' : uptime,
         'lastUpdate': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     }
-
     # Return a success response
     return jsonify({'message': 'Status for node {} updated to {}'.format(node_id, status)})
 

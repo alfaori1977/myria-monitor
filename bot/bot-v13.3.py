@@ -9,6 +9,11 @@ load_dotenv()  # take environment variables from .env.
 
 bot_token = os.environ.get("BOT_TOKEN", None)
 
+HEARTBEAT_INTERVAL=3600
+DEFAULT_STATUS_INTERVAL=600
+#STATUS_INTERVAL=DEFAULT_STATUS_INTERVAL
+
+
 def send_to_telegram(content, chat_id):
     bot = Bot(token=bot_token)
     print("SENDING:", content)
@@ -32,10 +37,12 @@ def send_info_to_telegram(context):
     totalNodes = lastLine[3]
     if runningNodes != totalNodes:
         warningIcons= "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️️⚠️⚠️⚠️"
-        message = f"{warningIcons}\n*Warning*: Some nodes are not running. {runningNodes}/{totalNodes}\n{warningIcons}"
+        message = f"{warningIcons}\n*Warning*: Some nodes are not running\. {runningNodes}/{totalNodes}\n{warningIcons}"
         for chat_id in chat_ids:
             send_to_telegram(message, chat_id)
+        #STATUS_INTERVAL=1
     else:
+        #STATUS_INTERVAL=DEFAULT_STATUS_INTERVAL
         pass
 
 def start(update, context):
@@ -72,7 +79,7 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("get_status", get_status))
     dp.add_handler(CommandHandler("get_summary", get_summary))
-    updater.job_queue.run_repeating(send_info_to_telegram, interval=600, first=0, context=allowed_chat_ids)
-    updater.job_queue.run_repeating(send_heartbeat, interval=3600, first=0, context=allowed_chat_ids)
+    updater.job_queue.run_repeating(send_info_to_telegram, interval=DEFAULT_STATUS_INTERVAL, first=0, context=allowed_chat_ids)
+    updater.job_queue.run_repeating(send_heartbeat, interval=HEARTBEAT_INTERVAL, first=0, context=allowed_chat_ids)
     updater.start_polling()
     updater.idle()

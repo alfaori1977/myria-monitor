@@ -13,7 +13,7 @@ def update_status():
     # Get the node ID and status from the request JSON data
     data = request.get_json()
     node_id = data['id']
-    if node_id != "":  
+    if node_id == "":  
         return ({'message': 'Empty node_id'},400)
     status = data['status']    
     hostname = data.get('hostname', '')
